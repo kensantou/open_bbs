@@ -40,36 +40,6 @@ class TopicUsecase{
       return $topics;
     }
 
-    public function selectRankingTopics($container){
-      $connection = $container->get('pdo');
-      $query = $connection->prepare(
-      "SELECT
-        topic_id,title,comment_cnt,image_name,created
-       FROM
-        topics
-       order by comment_cnt desc
-      ");
-      $query->execute();
-      $topics = $query->fetchAll();
-      return $topics;
-    }
-
-    public function selectWeeklyRankingTopics($container){
-      $connection = $container->get('pdo');
-      $query = $connection->prepare(
-      "SELECT
-        topic_id,title,comment_cnt,image_name,created
-       FROM
-        topics
-       WHERE
-        created > TIMESTAMP(DATE_SUB(NOW(), INTERVAL 7 DAY))
-       order by comment_cnt desc
-      ");
-      $query->execute();
-      $topics = $query->fetchAll();
-      return $topics;
-    }
-
     public function selectTopicById($container,$topic_id){
       $connection = $container->get('pdo');
       $topic_query = $connection->prepare(

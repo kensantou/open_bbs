@@ -17,20 +17,6 @@ $app->get('/', function ($request, $response, $args) {
     return $this->renderer->render($response, 'index.phtml', ['page_name'=>'new','topics'=>$topics,'weekly'=>$weekly]);
 });
 
-$app->get('/new', function ($request, $response, $args) {
-    $topicUsecase = new \App\Usecase\TopicUsecase();
-    $topics = $topicUsecase->selectNewTopics($this);
-    $weekly = $topicUsecase->selectWeeklyRankingTopics($this);
-    return $this->renderer->render($response, 'index.phtml', ['page_name'=>'new','topics'=>$topics,'weekly'=>$weekly]);
-});
-
-$app->get('/ranking', function ($request, $response, $args) {
-    $topicUsecase = new \App\Usecase\TopicUsecase();
-    $topics = $topicUsecase->selectRankingTopics($this);
-    $weekly = $topicUsecase->selectWeeklyRankingTopics($this);
-    return $this->renderer->render($response, 'index.phtml', ['page_name'=>'rank','topics'=>$topics,'weekly'=>$weekly]);
-});
-
 $app->get('/search', function ($request, $response, $args) {
     $params=$request->getParams();
     $keyword = $params['keyword'];
@@ -39,7 +25,6 @@ $app->get('/search', function ($request, $response, $args) {
     $weekly = $topicUsecase->selectWeeklyRankingTopics($this);
     return $this->renderer->render($response, 'index.phtml', ['page_name'=>'search','topics'=>$topics,'weekly'=>$weekly]);
 });
-
 
 $app->get('/topic/{id:[0-9]+}', function ($request, $response, $args) {
     $topicUsecase = new \App\Usecase\TopicUsecase();
