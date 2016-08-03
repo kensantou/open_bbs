@@ -1,0 +1,5 @@
+/logs/*
+!/logs/README.md
+/public/uploads/
+/public/uploads/tmp/
+.DS_Store

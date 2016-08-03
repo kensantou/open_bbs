@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<?php include(__DIR__."/common/head.html"); ?>
+  <body>
+<?php include(__DIR__."/common/header.html"); ?>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8 col-md-offset-2 white-box">
+        <div class="row buffer buffer-side">
+          <h4>トピックを作成する</h4>
+          <hr></hr>
+          <?php if(isset($error_list)){
+            foreach($error_list as $key => $value){ ?>
+              <div class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+                <?php echo $value; ?>
+              </div>
+          <?php }} ?>
+        </div>
+        <div class="row buffer buffer-side">
+          <span class="btn btn-warning col-md-3 col-xs-12 btn-sm buffer-right"><h5>１．トピック内容の入力</h5></span>
+          <span class="btn btn-default col-md-3 col-xs-12 btn-sm buffer-right"><h5>２．トピック内容の確認</h5></span>
+          <span class="btn btn-default col-md-3 col-xs-12 btn-sm buffer-right"><h5>３．トピック投稿完了</h5></span>
+        </div>
+        <div class="row buffer buffer-side">
+          <form action="/topic/confirm" method="post" enctype="multipart/form-data">
+            <fieldset class="form-group">
+              <input type="text" name="title" class="form-control" id="formGroupTitleInput" placeholder="タイトルを書く" value="<?php if(!empty($params))echo htmlspecialchars($params['title'])?>">
+            </fieldset>
+            <fieldset class="form-group">
+              <textarea name="comment" class="form-control" id="exampleTextarea" rows="3" placeholder="本文を書く"><?php if(!empty($params))echo htmlspecialchars($params['comment'])?></textarea>
+            </fieldset>
+            <fieldset class="form-group">
+              <input id="noname" type="checkbox" checked onclick=""></input>　匿名で投稿する
+              <input id="name" style="display:none;" name="name" type="text" class="form-control" id="formGroupTitleInput" placeholder="名前を入力">
+            </fieldset>
+            <fieldset class="form-group">
+              <p><input id="fake_input_file" readonly type="text" name="image" value="No Image"  onClick="$('#file').click();"></p>
+              <input type="file" name="image" id="file" style="display:none;" onchange="$('#fake_input_file').val($(this).val())">
+              <input type="button" class="btn btn-danger" value="画像を選択" onClick="$('#file').click();">
+              <small class="text-muted">アップロードできる画像は5MBまでです。</small>
+            </fieldset>
+            <button type="submit" class="btn btn-primary">トピックを作成する</button>
+          </form>
+        </div>
+        <div class="row buffer buffer-side">
+          <a class="btn buffer btn-primary" href="/" role="button">TOPに戻る</a>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#noname").click(function () {
+        if($("#noname").is(':checked')){
+          $("#name").hide();
+        }else{
+          $("#name").show();
+        }
+      });
+    });
+  </script>
+  </body>
+<?php include(__DIR__."/common/footer.html"); ?>
+</html>

@@ -1,0 +1,112 @@
+/* Sticky footer styles
+-------------------------------------------------- */
+html {
+  position: relative;
+  min-height: 100%;
+}
+body {
+  background-color: #faf3ea;
+  margin-bottom: 60px;
+}
+.white-box {background-color: #ffffff;padding-top: 10px}
+.container { margin-bottom: 90px;margin-top:10px;}
+.buffer { margin-top:10px;margin-bottom:10px}
+.no-buffer { margin-top:0px;margin-bottom:0px}
+.buffer-top { margin-top:10px}
+.buffer-bottom { margin-bottom:10px}
+.buffer-top3 { margin-top:3px}
+.buffer-side { margin-right:10px;margin-left:10px}
+.buffer-right { margin-right:10px}
+.buffer-left { margin-left:10px}
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background: #337ab7;
+}
+.footer a:link { color: #ffffff; }
+.footer a:visited { color: #ffffff; }
+.footer a:hover { color: #ffffff; }
+.footer a:active { color: #ffffff; }
+.header {
+  top: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 80px;
+  background: #337ab7;
+}
+
+.title {
+  color:#ffffff;
+  margin-top: 20px;
+  text-align: center;}
+header .title a {
+  width: 100%;
+  height: 100%;
+  display: block; }
+.trimming {
+  position:relative;
+  width: 80px;
+  height: 80px;
+  overflow: hidden;
+}
+hr{
+    border:none;
+    border-top:dashed 1px #CCC;
+    height:1px;
+    color:#9CA7E2;
+    margin: 0 6 0 6;
+}
+/*header nav*/
+nav {
+  margin-bottom: 20px;
+  height: 44px;
+  background: #FFF; }
+.header-nav .catch {
+  width:100%;
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 44px;
+  color: #FF8D99; }
+.header-nav form {
+  margin: 7px 0; }
+.header-nav form input[type="text"] {
+  padding: 0 36px 0 8px;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none; }
+.header-nav form .search {
+  position: absolute;
+  top: 8px;
+  right: 11px;
+  color: #FF8D99;
+  font-size: 14px;
+  width: 14px; }
+nav .header-nav form .search input[type="submit"] {
+  position: absolute;
+  top: 0;
+  left: 10px;}
+
+#searchform {
+	width: 300px;
+	display: block;
+	height: 24px;
+	position: relative;
+  margin-bottom: 20px;
+}
+#keywords	{
+	width: 290px;
+	position: absolute;
+	top: 3px;
+	left: 40px;
+	border: 1px solid #CCC;
+  border-radius: 2px;
+  height: 30px;
+}
+#searchBtn	{
+	position: absolute;
+	top: 8px;
+	left: 300px;
+}

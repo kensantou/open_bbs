@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<?php include(__DIR__."/common/head.html"); ?>
+  <body>
+<?php include(__DIR__."/common/header.html"); ?>
+  <div class="container">
+    <div class="row">
+      <div class="visible-xs">
+        <div class="row buffer buffer-side">
+            <a href="/topic/create" class="btn btn-primary btn-lg col-xs-12"><span class="glyphicon glyphicon-plus"></span>トピックを投稿する</a>
+        </div>
+      </div>
+      <div class="col-md-8 white-box">
+        <div class="row buffer">
+          <div class="col-md-12">
+            <?php if(empty($topics)){ ?>
+              <div class="alert alert-info" role="alert">
+                トピックがまだありません。
+              </div>
+            <?php } ?>
+            <?php foreach ($topics as $key) { ?>
+            <div class="comment buffer">
+              <a href="/topic/<?php printf($key["topic_id"]) ?>">
+                <div class="media-left">
+                  <?php if(!empty($key['image_name'])){ ?>
+                    <p class="trimming"><img class="media-object" src="/uploads/<?php echo $key['image_name'] ?>" width="80"/></p>
+                  <?php }else{ ?>
+                    <img src="/img/no_image.png" width="80" class="img"/>
+                  <?php }?>
+                </div>
+                <div class="media-body">
+                  <p class="comment buffer-top"><span><?php echo htmlspecialchars($key["comment_cnt"]."コメント　".$key["created"]) ?></span><span class="datetime">
+                  <h4><?php echo htmlspecialchars($key["title"]) ?></h4>
+                </div>
+              </a>
+              <hr></hr>
+            </div>
+            <?php } ?>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 buffer-left buffer-right">
+        <div class="row buffer buffer-side">
+            <a href="/topic/create" class="btn btn-primary btn-lg col-xs-12"><span class="glyphicon glyphicon-plus"></span>トピックを投稿する</a>
+        </div>
+      </div>
+      <div class="col-md-3 buffer-left buffer-right white-box">
+          <div class="row buffer buffer-side">
+            <h4>トピック作成のおすすめ</h4>
+            <hr></hr>
+            <h4><span class="glyphicon glyphicon glyphicon glyphicon-thumbs-up buffer-right" aria-hidden="true"></span>わかりやすいタイトル</h4>
+            他のユーザーがトピックの内容をイメージできるようなタイトルをつけてください。
+            <h4><span class="glyphicon glyphicon glyphicon glyphicon-thumbs-up buffer-right" aria-hidden="true"></span>話題にあった画像</h4>
+            「画像を選択」から、画像を選択していただいて、画像をアップロードすることができます。
+            <h4><span class="glyphicon glyphicon glyphicon glyphicon-thumbs-up buffer-right" aria-hidden="true"></span>わかりやすい文章</h4>
+            トピックに訪れた方が参加しやすい様に見てもわかりやすい具体的な文章を記入しましょう。
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> <!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  </body>
+<?php include(__DIR__."/common/footer.html"); ?>
+</html>

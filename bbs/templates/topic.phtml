@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ja">
+<?php include(__DIR__."/common/head.html"); ?>
+  <body>
+<?php include(__DIR__."/common/header.html"); ?>
+  <div class="container">
+    <div class="col-md-8 col-md-offset-2 white-box">
+      <?php if(isset($error_list)){
+        foreach($error_list as $key => $value){ ?>
+          <div class="alert alert-danger buffer" role="alert">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <?php echo $value; ?>
+          </div>
+      <?php }} ?>
+      <div class="row buffer-side buffer">
+        <div class="media">
+          <?php if(!empty($topic['image_name'])){ ?>
+          <div class="media-left">
+            <a href="/uploads/<?php echo $topic['image_name']?>">
+              <img class="media-object buffer" src="/uploads/<?php echo $topic['image_name']?>" width="100px">
+            </a>
+          </div>
+          <?php }?>
+          <div class="media-body">
+            <h3 class="media-heading buffer"><?php echo htmlspecialchars($topic['title'])?></h3>
+            <p><?php echo htmlspecialchars($topic['comment_cnt'])?>コメント</p>
+            <p><?php echo htmlspecialchars($topic['created'])?></p>
+            <a class="btn btn-primary" href="#comment_create" role="button">　コメント投稿へ　</a>
+          </div>
+        </div>
+        <hr></hr>
+        <div id="comment">
+          <?php foreach ($comments as $key) { ?>
+            <p><?php echo htmlspecialchars($key['comment_id']) ?>.<?php echo htmlspecialchars($key['name']."　".$key['created']) ?></p>
+            <h3><?php echo htmlspecialchars($key['message']) ?></h3>
+            <?php if(!empty($key['image_name'])){ ?>
+              <a href="/uploads/<?php printf($key['image_name'])?>">
+                <img src="/uploads/<?php printf($key['image_name'])?>" width="100px"></img>
+              </a>
+            <?php }?>
+            <hr></hr>
+          <?php } ?>
+        </div>
+      </div>
+      <div id="comment_create" class="row buffer-side">
+        <h4>コメントを投稿する</h4>
+        <?php if(isset($error_list)){
+          foreach($error_list as $key => $value){ ?>
+            <div class="alert alert-danger" role="alert">
+              <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+              <?php echo $value; ?>
+            </div>
+        <?php }} ?>
+        <form action="/topic/comment/confirm" method="post" enctype="multipart/form-data">
+          <fieldset class="form-group">
+            <textarea name="comment" class="form-control" id="exampleTextarea" rows="3" placeholder="コメントを書く"></textarea>
+          </fieldset>
+          <fieldset class="form-group">
+            <input id="noname" type="checkbox" checked onclick=""></input>　匿名で投稿する
+            <input id="name" style="display:none;" name="name" type="text" class="form-control" id="formGroupTitleInput" placeholder="名前を入力">
+          </fieldset>
+          <fieldset class="form-group">
+            <p><input id="fake_input_file" readonly type="text" name="image" value="No Image"  onClick="$('#file').click();"></p>
+            <input type="file" name="image" id="file" style="display:none;" onchange="$('#fake_input_file').val($(this).val())">
+            <input type="button" class="btn btn-danger" value="画像を選択" onClick="$('#file').click();">
+            <small class="text-muted">投稿できる画像は5MBまでです。</small>
+          </fieldset>
+
+          <input type="hidden" name="id" value=<?php echo $id?>>
+          <button type="submit" class="btn btn-primary buffer col-md-4 col-md-offset-4 col-xs-offset-0">コメントを投稿する</button>
+        </form>
+      </div>
+    </div>
+  </div> <!-- /container -->
+  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <!-- Include all compiled plugins (below), or include individual files as needed -->
+  <script src="/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      $("#noname").click(function () {
+        if($("#noname").is(':checked')){
+          $("#name").hide();
+        }else{
+          $("#name").show();
+        }
+      });
+    });
+  </script>
+  </body>
+<?php include(__DIR__."/common/footer.html"); ?>
+</html>
